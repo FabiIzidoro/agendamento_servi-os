@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendamento de Serviços - CMAA</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Fonte Rubik -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Logo CMAA">
+        </div>
+        <h1>Agendamento de Serviços</h1>
+    </header>
+
+    <main>
+        <section class="form-section">
+            <h2>Solicite um Serviço</h2>
+            <form>
+                <label for="colaborador">Nome do Colaborador:</label>
+                <input type="text" id="colaborador" name="colaborador" required>
+
+                <label for="placa">Placa do Veículo:</label>
+                <input type="text" id="placa" name="placa" placeholder="ABC-1234" required>
+
+                <label for="servico">Tipo de Serviço:</label>
+                <select id="servico" name="servico" required>
+                    <option value="">Selecione</option>
+                    <option value="troca_oleo">Troca de Óleo</option>
+                    <option value="revisao">Revisão</option>
+                    <option value="freios">Freios</option>
+                    <option value="outro">Outro</option>
+                </select>
+
+                <label for="data">Data Desejada:</label>
+                <input type="date" id="data" name="data" required>
+
+                <button type="submit">Solicitar Agendamento</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>
