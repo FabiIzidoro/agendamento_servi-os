@@ -13,7 +13,13 @@ def agendar():
     tipo_servico = request.form['tipo_servico']
     data_desejada = request.form['data_desejada']
 
-    return render_template('sucesso.html', nome=nome)
+    return render_template(
+        'sucesso.html',
+        nome=nome,
+        placa=placa,
+        tipo_servico=tipo_servico,
+        data_desejada=data_desejada
+    )
 
 if __name__ == '__main__':
     app.run(debug=True)

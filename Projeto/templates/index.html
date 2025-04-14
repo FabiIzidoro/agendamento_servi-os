@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agendamento de Serviços - CMAA</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Agendamento de Serviços - Usina CMAA</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     
     <!-- Fonte Rubik -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,32 +14,38 @@
 <body>
     <header>
         <div class="logo">
-            <img src="logo.png" alt="Logo CMAA">
+            <img src="{{ url_for('static', filename='logo-cmaa.png') }}" alt="Logo CMAA">
         </div>
-        <h1>Agendamento de Serviços</h1>
+        <h1>Agendamento de Serviços - Usina CMAA</h1>
     </header>
 
     <main>
         <section class="form-section">
             <h2>Solicite um Serviço</h2>
-            <form>
-                <label for="colaborador">Nome do Colaborador:</label>
-                <input type="text" id="colaborador" name="colaborador" required>
+            <form action="{{ url_for('agendar') }}" method="POST" enctype="multipart/form-data">
+                <label for="nome">Nome do Colaborador:</label>
+                <input type="text" id="nome" name="nome" required autocomplete="name">
+
+                <label for="matricula">Matrícula:</label>
+                <input type="text" id="matricula" name="matricula" required autocomplete="off">
 
                 <label for="placa">Placa do Veículo:</label>
-                <input type="text" id="placa" name="placa" placeholder="ABC-1234" required>
+                <input type="text" id="placa" name="placa" placeholder="ABC-1234" required autocomplete="plate">
 
-                <label for="servico">Tipo de Serviço:</label>
-                <select id="servico" name="servico" required>
+                <label for="tipo_servico">Tipo de Serviço:</label>
+                <select id="tipo_servico" name="tipo_servico" required>
                     <option value="">Selecione</option>
-                    <option value="troca_oleo">Troca de Óleo</option>
-                    <option value="revisao">Revisão</option>
-                    <option value="freios">Freios</option>
-                    <option value="outro">Outro</option>
+                    <option value="Troca de Óleo">Troca de Óleo</option>
+                    <option value="Revisão">Revisão</option>
+                    <option value="Freios">Freios</option>
+                    <option value="Outro">Outro</option>
                 </select>
 
-                <label for="data">Data Desejada:</label>
-                <input type="date" id="data" name="data" required>
+                <label for="data_desejada">Data Desejada:</label>
+                <input type="date" id="data_desejada" name="data_desejada" required autocomplete="off">
+
+                <label for="foto_servico">Fotos do Serviço (Opcional):</label>
+                <input type="file" id="foto_servico" name="foto_servico" accept="image/*">
 
                 <button type="submit">Solicitar Agendamento</button>
             </form>

@@ -2,13 +2,23 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Agendamento realizado</title>
+    <title>Agendamento Realizado</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="container">
         <h1>Agendamento realizado com sucesso!</h1>
-        <p>Obrigado, {{ nome }}. O mecânico analisará sua solicitação e retornará em breve.</p>
+        <p>Obrigado, {{ nome }}. O mecânico analisará sua solicitação.</p>
+        <p><strong>Matrícula:</strong> {{ matricula }}</p>
+        <p><strong>Placa do veículo:</strong> {{ placa }}</p>
+        <p><strong>Serviço solicitado:</strong> {{ tipo_servico }}</p>
+        <p><strong>Data desejada:</strong> {{ data_desejada }}</p>
+        
+        {% if foto_path %}
+            <p><strong>Fotos do serviço:</strong></p>
+            <img src="{{ url_for('static', filename='uploads/' + foto_path.split('/')[-1]) }}" alt="Foto do serviço" style="max-width: 100%; height: auto;">
+        {% endif %}
+
         <a href="{{ url_for('index') }}">Voltar para a página inicial</a>
     </div>
 </body>
