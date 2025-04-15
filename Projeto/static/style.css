@@ -1,3 +1,4 @@
+/* Estilos padrão */
 body {
     margin: 0;
     font-family: 'Rubik', sans-serif;
@@ -5,6 +6,7 @@ body {
     background-attachment: fixed;
 }
 
+/* Header */
 header {
     background-color: #007b3a;
     color: white;
@@ -22,12 +24,14 @@ header h1 {
     font-size: 28px;
 }
 
+/* Main Section */
 main {
     display: flex;
     justify-content: center;
     padding: 40px 20px;
 }
 
+/* Form Section */
 .form-section {
     background-color: white;
     padding: 30px;
@@ -75,6 +79,7 @@ button:hover {
     background-color: #005e2b;
 }
 
+/* Container for Success Page */
 .container {
     max-width: 600px;
     margin: 50px auto;
@@ -82,4 +87,68 @@ button:hover {
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* Media Queries for Mobile */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 24px;
+    }
+
+    .form-section {
+        max-width: 100%;
+        padding: 15px;
+    }
+
+    .form-section h2 {
+        font-size: 22px;
+    }
+
+    input, select, button {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    button {
+        padding: 10px;
+    }
+
+    .container {
+        margin: 20px;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .logo img {
+        margin-bottom: 10px;
+    }
+
+    .form-section {
+        max-width: 100%;
+        padding: 10px;
+    }
+
+    .form-section h2 {
+        font-size: 18px;
+    }
+
+    input, select, button {
+        font-size: 12px;
+        padding: 6px;
+    }
+
+    button {
+        padding: 8px;
+    }
+
+    .container {
+        margin: 10px;
+        padding: 15px;
+    }
 }
