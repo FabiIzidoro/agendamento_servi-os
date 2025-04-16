@@ -11,28 +11,62 @@
             font-family: 'Rubik', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #e6f2ec; /* Cor mais suave e alinhada à CMAA */
+            background-color: #e6f2ec; /* Cor suave alinhada à CMAA */
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            text-align: center;
         }
 
+        /* Faixa superior verde */
+        .header-bar {
+            background-color: #007b3a; /* Verde da CMAA */
+            color: white;
+            padding: 10px 20px;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            font-size: 20px;
+            z-index: 1000;
+            justify-content: flex-start;  /* Alinha o título à esquerda */
+        }
+
+        /* Logo da CMAA */
+        .logo-cmaa {
+            max-height: 60px;
+            margin-right: 15px;
+        }
+
+        /* Título "Agendamento de Serviços" */
+        .header-text {
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+        }
+
+        /* Formulário de Agendamento */
         .form-container {
             background: white;
             padding: 30px 40px;
-            border-radius: 10px;
-            text-align: left;
+            border-radius: 15px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 600px;
+            margin-top: 100px; /* Adiciona espaço para a faixa fixa no topo */
+            text-align: left;
         }
 
+        /* Estilo do Título "Solicite um Serviço" */
         .form-container h1 {
-            color: #007b3a; /* Cor verde, similar ao branding da CMAA */
+            color: #007b3a; /* Cor verde */
             font-size: 28px;
-            text-align: center;
+            text-align: left;
             margin-bottom: 20px;
+            font-weight: bold;
         }
 
         label {
@@ -40,36 +74,47 @@
             color: #333;
             margin-bottom: 5px;
             display: block;
+            font-weight: bold;  /* Negrito nos labels */
         }
 
         input, select, textarea {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
+            width: 100%; /* Garantir que os campos tenham a mesma largura */
+            padding: 14px;
+            margin-bottom: 20px;
             border: 1px solid #ccc;
-            border-radius: 5px;
+            border-radius: 8px;
             font-size: 16px;
             box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        /* Estilo de foco nos campos */
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #007b3a;
+            box-shadow: 0 0 5px rgba(0, 123, 58, 0.2);
         }
 
         textarea {
             resize: vertical;
         }
 
+        /* Botão de Envio */
         .cta-button {
             background-color: #007b3a; /* Cor verde CMAA */
             color: white;
             font-size: 18px;
             padding: 15px 30px;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
             width: 100%;
             transition: background-color 0.3s;
+            margin-top: 20px;
         }
 
         .cta-button:hover {
-            background-color: #005e2b; /* Cor mais escura no hover */
+            background-color: #005e2b;
         }
 
         .cta-button:focus {
@@ -77,12 +122,28 @@
         }
 
         .input-container {
-            margin-bottom: 15px;
+            margin-bottom: 25px;
         }
 
-        .input-container input, .input-container select, .input-container textarea {
+        /* Área de Upload de Arquivo */
+        .file-upload-container {
+            text-align: center;
+            border: 2px dashed #007b3a;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+
+        .file-upload-container input {
+            display: none;
+        }
+
+        .file-upload-container label {
             font-size: 16px;
-            padding: 12px;
+            font-weight: bold;
+            color: #007b3a;
+            cursor: pointer;
         }
 
         /* Responsividade */
@@ -91,18 +152,26 @@
                 padding: 20px;
             }
         }
-
     </style>
 </head>
 <body>
 
+    <!-- Faixa Superior -->
+    <div class="header-bar">
+        <img src="{{ url_for('static', filename='logo-cmaa.png') }}" alt="Logo CMAA" class="logo-cmaa">
+        <div class="header-text">Agendamento de Serviços - Usina CMAA</div>
+    </div>
+
+    <!-- Formulário de Agendamento -->
     <div class="form-container">
-        <h1>Agende um Serviço para seu Carro</h1>
+        <!-- Título "Solicite um Serviço" -->
+        <h1>Solicite um Serviço</h1>
+        
         <form action="{{ url_for('agendar') }}" method="POST" enctype="multipart/form-data">
             
             <!-- Nome do Colaborador -->
             <div class="input-container">
-                <label for="nome">Nome:</label>
+                <label for="nome">Nome do Colaborador:</label>
                 <input type="text" id="nome" name="nome" required>
             </div>
 
@@ -129,35 +198,36 @@
                 </select>
             </div>
 
-            <!-- Data Desejada para o Serviço -->
-            <div class="input-container">
-                <label for="data_desejada">Data Desejada:</label>
-                <input type="date" id="data_desejada" name="data_desejada" required>
-            </div>
-
-            <!-- Urgência do Serviço -->
-            <div class="input-container">
-                <label for="urgencia">Urgência:</label>
-                <select id="urgencia" name="urgencia" required>
-                    <option value="Urgente">Urgente</option>
-                    <option value="Pouco Urgente">Pouco Urgente</option>
-                </select>
-            </div>
-
             <!-- Descrição do Serviço, caso o tipo seja "Outro" -->
             <div class="input-container">
                 <label for="descricao_servico">Descrição do Serviço (Caso "Outro"):</label>
                 <textarea id="descricao_servico" name="descricao_servico" placeholder="Descreva o serviço..." rows="4"></textarea>
             </div>
 
-            <!-- Fotos do Serviço -->
+            <!-- Urgência do Serviço -->
             <div class="input-container">
-                <label for="foto_servico">Fotos do Serviço (Opcional):</label>
+                <label for="urgencia">Urgência do Problema:</label>
+                <select id="urgencia" name="urgencia" required>
+                    <option value="Urgente">Urgente</option>
+                    <option value="Pouco Urgente">Pouco Urgente</option>
+                    <option value="Não Urgente">Não Urgente</option>
+                </select>
+            </div>
+
+            <!-- Data Desejada para o Serviço -->
+            <div class="input-container">
+                <label for="data_desejada">Data Desejada:</label>
+                <input type="date" id="data_desejada" name="data_desejada" required>
+            </div>
+
+            <!-- Fotos do Serviço -->
+            <div class="file-upload-container">
+                <label for="foto_servico">Escolha a foto ou arraste para aqui</label>
                 <input type="file" id="foto_servico" name="foto_servico" accept="image/*">
             </div>
 
             <!-- Botão de Envio -->
-            <button type="submit" class="cta-button">Enviar Agendamento</button>
+            <button type="submit" class="cta-button">Solicitar Agendamento</button>
         </form>
     </div>
 

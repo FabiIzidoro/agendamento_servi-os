@@ -14,11 +14,11 @@ if not os.path.exists(UPLOAD_FOLDER):
 
 @app.route('/')
 def index():
-    return redirect(url_for('inicio'))  # Redireciona para a página inicial
+    return redirect(url_for('inicio'))  # Redireciona para a página de boas-vindas (início)
 
 @app.route('/inicio')
 def inicio():
-    return render_template('paginainicial.html')  # Página inicial de boas-vindas
+    return render_template('paginainicial.html')  # Página de boas-vindas com o botão de agendamento
 
 @app.route('/agendar', methods=['GET', 'POST'])
 def agendar():

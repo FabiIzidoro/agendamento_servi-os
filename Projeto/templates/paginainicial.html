@@ -25,28 +25,25 @@
             height: 100vh;
         }
 
-        /* Barra Superior com Slogan */
+        /* Barra Superior com a Logo da CMAA */
         .navbar {
             background-color: #007b3a;  /* Verde CMAA */
             color: white;
-            padding: 10px 40px;
+            padding: 15px 40px;
             width: 100%;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start; /* Alinha logo à esquerda */
             align-items: center;
+            position: fixed;  /* Barra fixa no topo */
+            top: 0;
+            left: 0;
+            z-index: 1000;  /* Garante que a barra fique acima de outros elementos */
         }
 
-        .navbar h1 {
-            font-family: 'Rubik', sans-serif;
-            font-size: 32px;
-            margin: 0;
-        }
-
-        .slogan {
-            font-family: 'Roboto', sans-serif;
-            font-size: 18px;
-            font-weight: 500;
-            color: #f8f9fa;
+        /* Logo na barra superior */
+        .logo img {
+            height: 50px;  /* Altura da logo ajustada */
+            width: auto;   /* Largura ajustada automaticamente para manter proporção */
         }
 
         /* Corpo do Conteúdo */
@@ -58,21 +55,27 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             width: 90%;
             max-width: 700px;
-            margin-top: 30px;
+            margin-top: 120px;  /* Distância para não sobrepor a barra fixa */
+            display: flex;
+            flex-direction: column; /* Organiza elementos em coluna */
+            align-items: center;    /* Centraliza os elementos horizontalmente */
         }
 
+        /* Título de Boas-Vindas */
         .welcome-container h1 {
             color: #007b3a;  /* Cor verde, similar ao branding da CMAA */
             font-size: 36px;
-            margin-bottom: 20px;
+            margin-bottom: 20px;  /* Espaço abaixo do título */
         }
 
+        /* Estilo do parágrafo de descrição */
         .welcome-container p {
             font-size: 20px;
             color: #555;
             margin-bottom: 30px;
         }
 
+        /* Botão de Agendamento */
         .cta-button {
             background-color: #007b3a;  /* Cor verde CMAA */
             color: white;
@@ -92,14 +95,6 @@
             outline: none;
         }
 
-        .logo {
-            margin-bottom: 20px;
-        }
-
-        .logo img {
-            width: 180px;  /* Ajuste o tamanho do logo da empresa */
-        }
-
         /* Responsividade */
         @media (max-width: 768px) {
             .welcome-container {
@@ -111,29 +106,27 @@
                 padding: 12px;
             }
         }
-
     </style>
 </head>
 <body>
 
-    <!-- Barra Superior com Slogan -->
+    <!-- Barra Superior com a Logo da CMAA -->
     <div class="navbar">
-        <div class="slogan">
-            Energia que Transforma
-        </div>
-        <h1>CMAA</h1>
-    </div>
-
-    <!-- Corpo do Conteúdo -->
-    <div class="welcome-container">
-        <!-- Logo da CMAA -->
+        <!-- Logo da CMAA na Barra Superior -->
         <div class="logo">
             <img src="{{ url_for('static', filename='logo-cmaa.png') }}" alt="Logo CMAA">
         </div>
-        
+    </div>
+
+    <!-- Container de Boas-vindas -->
+    <div class="welcome-container">
+        <!-- Título de Boas-Vindas -->
         <h1>Bem-vindo à CMAA!</h1>
-        <p>Faça um agendamento para o serviço do seu carro agora mesmo e tenha um atendimento rápido e de qualidade, diretamente com nossa equipe interna.</p>
+
+        <!-- Descrição sobre os serviços da CMAA -->
+        <p>Faça seu agendamento de forma rápida e simples clicando no botão abaixo.</p>
         
+        <!-- Botão de Agendamento -->
         <a href="{{ url_for('agendar') }}">
             <button class="cta-button">Agende seu Serviço</button>
         </a>
