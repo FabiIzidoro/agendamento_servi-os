@@ -56,12 +56,147 @@ label {
     font-weight: 600;
 }
 
-input, select {
+input, select, textarea {
     margin-bottom: 20px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
+}
+
+/* Caixa de Seleção e Botões de Rádio */
+select, input[type="radio"], input[type="checkbox"] {
+    font-size: 16px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fafafa;
+    transition: all 0.3s ease;
+    width: auto;
+    margin-left: 10px;
+}
+
+/* Estilo quando o input (select, radio, checkbox) é focado */
+select:focus, input[type="radio"]:focus, input[type="checkbox"]:focus {
+    outline: none;
+    border-color: #007b3a;
+}
+
+/* Alinhar a caixa de seleção ao lado da palavra */
+label input[type="radio"], label input[type="checkbox"], label select {
+    margin-left: 5px;
+    vertical-align: middle; /* Garante que a caixa de seleção ou rádio esteja alinhada ao centro da palavra */
+}
+
+/* Estilo dos botões de rádio e checkboxes */
+input[type="radio"], input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+/* Estilo para o campo de descrição do serviço "Outro" */
+#outro_servico {
+    margin-bottom: 20px;
+}
+
+#outro_servico textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Estilo para os campos de urgência */
+input[type="radio"] {
+    margin-right: 10px;
+    width: 20px; /* Ajustando o tamanho do botão de rádio */
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #007b3a;
+    transition: all 0.3s ease;
+}
+
+/* Estilo para os botões de rádio (Urgente, Pouco Urgente, Não Urgente) */
+input[type="radio"]:checked {
+    background-color: #007b3a;
+    border-color: #007b3a;
+}
+
+/* Estilo quando o input (radio) é focado */
+input[type="radio"]:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 123, 58, 0.2);
+}
+
+/* Estilo para o contêiner de radio */
+div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+/* Melhorando a aparência dos labels para os botões de rádio */
+label[for="urgente"], label[for="pouco_urgente"], label[for="nao_urgente"] {
+    margin-left: 10px;
+    font-size: 16px;
+    color: #333;
+}
+
+/* Estilo para o contêiner de radio */
+div {
+    margin-bottom: 15px;
+}
+
+/* Estilo para a área de upload de fotos */
+.file-upload {
+    position: relative;
+    border: 2px dashed #007b3a;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s ease;
+}
+
+.file-upload:hover {
+    background-color: #e6f2ec;
+}
+
+.upload-label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #007b3a;
+    cursor: pointer;
+}
+
+input[type="file"] {
+    display: none;  /* Oculta o botão de upload padrão */
+}
+
+.preview-container {
+    margin-top: 20px;
+    display: none;
+}
+
+.preview-container img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 10px;
+    border: 2px solid #007b3a;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+input[type="file"]:valid + .upload-label {
+    color: #28a745; /* Cor verde quando a imagem é carregada */
+}
+
+/* Mensagem de erro */
+#error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
 }
 
 button {

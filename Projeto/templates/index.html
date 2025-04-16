@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agendamento de Serviços - Usina CMAA</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    
+
     <!-- Fonte Rubik -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,10 +30,10 @@
                 <input type="text" id="matricula" name="matricula" required autocomplete="off">
 
                 <label for="placa">Placa do Veículo:</label>
-                <input type="text" id="placa" name="placa" placeholder="ABC-1234" required autocomplete="plate">
+                <input type="text" id="placa" name="placa" placeholder="Ex: ABC-1234" required autocomplete="plate">
 
                 <label for="tipo_servico">Tipo de Serviço:</label>
-                <select id="tipo_servico" name="tipo_servico" required>
+                <select id="tipo_servico" name="tipo_servico" required onchange="toggleOutroField()">
                     <option value="">Selecione</option>
                     <option value="Troca de Óleo">Troca de Óleo</option>
                     <option value="Revisão">Revisão</option>
@@ -41,15 +41,71 @@
                     <option value="Outro">Outro</option>
                 </select>
 
+                <div id="outro_servico" style="display:none;">
+                    <label for="descricao_servico">Descreva o Serviço (se "Outro" for selecionado):</label>
+                    <textarea id="descricao_servico" name="descricao_servico" placeholder="Descreva o problema..."></textarea>
+                </div>
+
+                <label for="urgencia">Urgência do Problema:</label>
+                <div>
+                    <input type="radio" id="urgente" name="urgencia" value="Urgente" required>
+                    <label for="urgente">Urgente</label>
+
+                    <input type="radio" id="pouco_urgente" name="urgencia" value="Pouco Urgente" required>
+                    <label for="pouco_urgente">Pouco Urgente</label>
+
+                    <input type="radio" id="nao_urgente" name="urgencia" value="Não Urgente" required>
+                    <label for="nao_urgente">Não Urgente</label>
+                </div>
+
                 <label for="data_desejada">Data Desejada:</label>
                 <input type="date" id="data_desejada" name="data_desejada" required autocomplete="off">
 
                 <label for="foto_servico">Fotos do Serviço (Opcional):</label>
-                <input type="file" id="foto_servico" name="foto_servico" accept="image/*">
+                <div class="file-upload">
+                    <input type="file" id="foto_servico" name="foto_servico" accept="image/*" onchange="previewImage(event)">
+                    <label for="foto_servico" class="upload-label">Escolha a foto ou arraste para aqui</label>
+                    <div id="preview-container" class="preview-container" style="display:none;">
+                        <img id="preview" src="" alt="Pré-visualização da foto">
+                    </div>
+                </div>
 
                 <button type="submit">Solicitar Agendamento</button>
             </form>
         </section>
     </main>
+
+    <!-- Código JavaScript Adicionado -->
+    <script>
+        // Função para mostrar o campo "Outro" quando o tipo de serviço for selecionado como "Outro"
+        function toggleOutroField() {
+            var tipoServico = document.getElementById("tipo_servico").value;
+            var outroField = document.getElementById("outro_servico");
+            if (tipoServico === "Outro") {
+                outroField.style.display = "block";  // Exibe o campo de descrição
+                document.getElementById("descricao_servico").setAttribute("required", "required");  // Torna o campo obrigatório
+            } else {
+                outroField.style.display = "none";  // Esconde o campo de descrição
+                document.getElementById("descricao_servico").removeAttribute("required");  // Torna o campo não obrigatório
+            }
+        }
+
+        // Função para pré-visualizar a imagem antes de enviar
+        function previewImage(event) {
+            const previewContainer = document.getElementById('preview-container');
+            const preview = document.getElementById('preview');
+            const file = event.target.files[0]; // Obtém o arquivo selecionado
+
+            if (file) {
+                const reader = new FileReader(); // Cria um novo objeto FileReader
+                reader.onload = function(e) {
+                    preview.src = e.target.result; // Define o src da imagem para o conteúdo lido
+                    preview.style.display = 'block'; // Exibe a imagem
+                    previewContainer.style.display = 'block'; // Exibe o contêiner da imagem
+                };
+                reader.readAsDataURL(file); // Lê o arquivo como uma URL
+            }
+        }
+    </script>
 </body>
 </html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bem-vindo à CMAA</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- Fonte Rubik e Roboto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Cor da Página */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        /* Barra Superior com Slogan */
+        .navbar {
+            background-color: #007b3a;  /* Verde CMAA */
+            color: white;
+            padding: 10px 40px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar h1 {
+            font-family: 'Rubik', sans-serif;
+            font-size: 32px;
+            margin: 0;
+        }
+
+        .slogan {
+            font-family: 'Roboto', sans-serif;
+            font-size: 18px;
+            font-weight: 500;
+            color: #f8f9fa;
+        }
+
+        /* Corpo do Conteúdo */
+        .welcome-container {
+            background: white;
+            padding: 40px 60px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 700px;
+            margin-top: 30px;
+        }
+
+        .welcome-container h1 {
+            color: #007b3a;  /* Cor verde, similar ao branding da CMAA */
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .welcome-container p {
+            font-size: 20px;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        .cta-button {
+            background-color: #007b3a;  /* Cor verde CMAA */
+            color: white;
+            font-size: 18px;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .cta-button:hover {
+            background-color: #005e2b;  /* Cor mais escura no hover */
+        }
+
+        .cta-button:focus {
+            outline: none;
+        }
+
+        .logo {
+            margin-bottom: 20px;
+        }
+
+        .logo img {
+            width: 180px;  /* Ajuste o tamanho do logo da empresa */
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .welcome-container {
+                padding: 20px;
+            }
+
+            .cta-button {
+                width: 100%;
+                padding: 12px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Barra Superior com Slogan -->
+    <div class="navbar">
+        <div class="slogan">
+            Energia que Transforma
+        </div>
+        <h1>CMAA</h1>
+    </div>
+
+    <!-- Corpo do Conteúdo -->
+    <div class="welcome-container">
+        <!-- Logo da CMAA -->
+        <div class="logo">
+            <img src="{{ url_for('static', filename='logo-cmaa.png') }}" alt="Logo CMAA">
+        </div>
+        
+        <h1>Bem-vindo à CMAA!</h1>
+        <p>Faça um agendamento para o serviço do seu carro agora mesmo e tenha um atendimento rápido e de qualidade, diretamente com nossa equipe interna.</p>
+        
+        <a href="{{ url_for('agendar') }}">
+            <button class="cta-button">Agende seu Serviço</button>
+        </a>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendar Serviço</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+        body {
+            font-family: 'Rubik', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e6f2ec; /* Cor mais suave e alinhada à CMAA */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            background: white;
+            padding: 30px 40px;
+            border-radius: 10px;
+            text-align: left;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .form-container h1 {
+            color: #007b3a; /* Cor verde, similar ao branding da CMAA */
+            font-size: 28px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        .cta-button {
+            background-color: #007b3a; /* Cor verde CMAA */
+            color: white;
+            font-size: 18px;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        .cta-button:hover {
+            background-color: #005e2b; /* Cor mais escura no hover */
+        }
+
+        .cta-button:focus {
+            outline: none;
+        }
+
+        .input-container {
+            margin-bottom: 15px;
+        }
+
+        .input-container input, .input-container select, .input-container textarea {
+            font-size: 16px;
+            padding: 12px;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .form-container {
+                padding: 20px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h1>Agende um Serviço para seu Carro</h1>
+        <form action="{{ url_for('agendar') }}" method="POST" enctype="multipart/form-data">
+            
+            <!-- Nome do Colaborador -->
+            <div class="input-container">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" required>
+            </div>
+
+            <!-- Matrícula do Colaborador -->
+            <div class="input-container">
+                <label for="matricula">Matrícula:</label>
+                <input type="text" id="matricula" name="matricula" required>
+            </div>
+
+            <!-- Placa do Veículo -->
+            <div class="input-container">
+                <label for="placa">Placa do Veículo:</label>
+                <input type="text" id="placa" name="placa" required>
+            </div>
+
+            <!-- Tipo de Serviço -->
+            <div class="input-container">
+                <label for="tipo_servico">Tipo de Serviço:</label>
+                <select id="tipo_servico" name="tipo_servico" required>
+                    <option value="Troca de Óleo">Troca de Óleo</option>
+                    <option value="Revisão">Revisão</option>
+                    <option value="Freios">Freios</option>
+                    <option value="Outro">Outro</option>
+                </select>
+            </div>
+
+            <!-- Data Desejada para o Serviço -->
+            <div class="input-container">
+                <label for="data_desejada">Data Desejada:</label>
+                <input type="date" id="data_desejada" name="data_desejada" required>
+            </div>
+
+            <!-- Urgência do Serviço -->
+            <div class="input-container">
+                <label for="urgencia">Urgência:</label>
+                <select id="urgencia" name="urgencia" required>
+                    <option value="Urgente">Urgente</option>
+                    <option value="Pouco Urgente">Pouco Urgente</option>
+                </select>
+            </div>
+
+            <!-- Descrição do Serviço, caso o tipo seja "Outro" -->
+            <div class="input-container">
+                <label for="descricao_servico">Descrição do Serviço (Caso "Outro"):</label>
+                <textarea id="descricao_servico" name="descricao_servico" placeholder="Descreva o serviço..." rows="4"></textarea>
+            </div>
+
+            <!-- Fotos do Serviço -->
+            <div class="input-container">
+                <label for="foto_servico">Fotos do Serviço (Opcional):</label>
+                <input type="file" id="foto_servico" name="foto_servico" accept="image/*">
+            </div>
+
+            <!-- Botão de Envio -->
+            <button type="submit" class="cta-button">Enviar Agendamento</button>
+        </form>
+    </div>
+
+</body>
+</html>
