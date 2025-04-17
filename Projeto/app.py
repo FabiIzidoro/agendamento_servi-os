@@ -6,10 +6,10 @@ from werkzeug.utils import secure_filename
 app = Flask(__name__)
 
 # Definindo a pasta para salvar as imagens
-UPLOAD_FOLDER = os.path.join('static', 'uploads')  # Caminho correto para a pasta 'uploads'
+UPLOAD_FOLDER = os.path.join('static', 'uploads')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-# Configuração para o tamanho máximo do arquivo (por exemplo, 16MB)
+# Configuração para o tamanho máximo do arquivo (16MB)
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # Limite de 16MB
 
 # Verificar se a pasta existe, se não, cria
@@ -31,12 +31,12 @@ def agendar():
         nome = request.form['nome']
         matricula = request.form['matricula']
         placa = request.form['placa']
-        frota = request.form['frota']  # Coleta da Frota do Carro
-        veiculo = request.form['veiculo']  # Coleta do Veículo para Manutenção
+        frota = request.form['frota']
+        veiculo = request.form['veiculo']
         tipo_servico = request.form['tipo_servico']
         data_desejada = request.form['data_desejada']
         urgencia = request.form['urgencia']
-        descricao_servico = request.form.get('descricao_servico', None)  # Para o campo 'Outro'
+        descricao_servico = request.form.get('descricao_servico', None)
 
         # Verificar se foi feito upload de uma imagem
         foto_path = None
@@ -49,20 +49,16 @@ def agendar():
                 
                 if file_extension in allowed_extensions:
                     # Gerar um nome único para o arquivo usando nome, matrícula e timestamp
-                    timestamp = str(int(time.time()))  # Usando timestamp para garantir um nome único
+                    timestamp = str(int(time.time()))
                     filename = f"{nome}_{matricula}_{timestamp}.{file_extension}"
-                    
-                    # Caminho onde a imagem será salva
                     foto_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-                    
-                    # Salvar a imagem
                     foto_servico.save(foto_path)
                 else:
                     return "Formato de arquivo inválido. Aceito apenas PNG, JPG, JPEG, GIF.", 400
             else:
-                foto_path = None  # Caso não tenha foto
+                foto_path = None
         else:
-            foto_path = None  # Caso não tenha foto
+            foto_path = None
 
         # Redirecionar para a página de sucesso com os dados coletados
         return render_template(
@@ -70,15 +66,15 @@ def agendar():
             nome=nome,
             matricula=matricula,
             placa=placa,
-            frota=frota,  # Enviar a Frota do Carro
-            veiculo=veiculo,  # Enviar o Veículo para Manutenção
+            frota=frota,
+            veiculo=veiculo,
             tipo_servico=tipo_servico,
             descricao_servico=descricao_servico,
             urgencia=urgencia,
             data_desejada=data_desejada,
-            foto_path=foto_path  # Enviar o caminho da foto
+            foto_path=foto_path
         )
-    
+
     return render_template('agendamento.html')  # Página com o formulário de agendamento
 
 if __name__ == '__main__':

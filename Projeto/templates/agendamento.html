@@ -1,1 +1,279 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendar Serviço</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
+    <style>
+        body {
+            font-family: 'Rubik', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e6f2ec; /* Cor suave alinhada à CMAA */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        /* Faixa superior verde */
+        .header-bar {
+            background-color: #007b3a; /* Verde da CMAA */
+            color: white;
+            padding: 10px 20px;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            font-size: 20px;
+            z-index: 1000;
+            justify-content: flex-start;  /* Alinha o título à esquerda */
+        }
+
+        /* Logo da CMAA */
+        .logo-cmaa {
+            max-height: 60px;
+            margin-right: 15px;
+        }
+
+        /* Título "Agendamento de Serviços" */
+        .header-text {
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+        }
+
+        /* Formulário de Agendamento */
+        .form-container {
+            background: rgba(255, 255, 255, 0.8);  /* Fundo branco translúcido */
+            padding: 30px 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            margin-top: 100px; /* Adiciona espaço para a faixa fixa no topo */
+            text-align: left;
+        }
+
+        /* Estilo do Título "Solicite um Serviço" */
+        .form-container h1 {
+            color: #007b3a; /* Cor verde */
+            font-size: 28px;
+            text-align: left;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        label {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 5px;
+            display: block;
+            font-weight: bold;  /* Negrito nos labels */
+        }
+
+        input, select, textarea {
+            width: 100%; /* Garantir que os campos tenham a mesma largura */
+            padding: 14px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #007b3a;
+            box-shadow: 0 0 5px rgba(0, 123, 58, 0.2);
+        }
+
+        .cta-button {
+            background-color: #007b3a; /* Cor verde CMAA */
+            color: white;
+            font-size: 18px;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+
+        .cta-button:hover {
+            background-color: #005e2b;
+        }
+
+        .cta-button:focus {
+            outline: none;
+        }
+
+        .file-upload-container {
+            text-align: center;
+            border: 2px dashed #007b3a;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+
+        .file-upload-container input {
+            display: none;
+        }
+
+        .file-upload-container label {
+            font-size: 16px;
+            font-weight: bold;
+            color: #007b3a;
+            cursor: pointer;
+        }
+
+        /* Exibição da imagem (pré-visualização) */
+        .preview-container {
+            margin-top: 20px;
+            display: none; /* Inicialmente oculto */
+        }
+
+        .preview-container img {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            border-radius: 8px;
+            border: 2px solid #007b3a;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .form-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Faixa Superior -->
+    <div class="header-bar">
+        <img src="{{ url_for('static', filename='logo-cmaa.png') }}" alt="Logo CMAA" class="logo-cmaa">
+        <div class="header-text">Agendamento de Serviços - Usina CMAA</div>
+    </div>
+
+    <!-- Formulário de Agendamento -->
+    <div class="form-container">
+        <h1>Solicite um Serviço</h1>
+
+        <form action="{{ url_for('agendar') }}" method="POST" enctype="multipart/form-data">
+            <div class="input-container">
+                <label for="nome">Nome do Colaborador:</label>
+                <input type="text" id="nome" name="nome" required>
+            </div>
+
+            <div class="input-container">
+                <label for="matricula">Matrícula:</label>
+                <input type="text" id="matricula" name="matricula" required>
+            </div>
+
+            <div class="input-container">
+                <label for="placa">Placa do Veículo:</label>
+                <input type="text" id="placa" name="placa" placeholder="Ex: ABC-1234" required>
+            </div>
+
+            <div class="input-container">
+                <label for="frota">Frota do Carro:</label>
+                <input type="text" id="frota" name="frota" required>
+            </div>
+
+            <div class="input-container">
+                <label for="veiculo">Veículo para Manutenção:</label>
+                <input type="text" id="veiculo" name="veiculo" required>
+            </div>
+
+            <div class="input-container">
+                <label for="tipo_servico">Tipo de Serviço:</label>
+                <select id="tipo_servico" name="tipo_servico" required onchange="toggleOutroField()">
+                    <option value="">Selecione</option>
+                    <option value="Troca de Óleo">Troca de Óleo</option>
+                    <option value="Revisão">Revisão</option>
+                    <option value="Freios">Freios</option>
+                    <option value="Outro">Outro</option>
+                </select>
+            </div>
+
+            <div class="input-container" id="outro_servico" style="display:none;">
+                <label for="descricao_servico">Descrição do Serviço (Caso "Outro"):</label>
+                <textarea id="descricao_servico" name="descricao_servico" placeholder="Descreva o serviço..." rows="4"></textarea>
+            </div>
+
+            <div class="input-container">
+                <label for="urgencia">Urgência do Problema:</label>
+                <div>
+                    <input type="radio" id="urgente" name="urgencia" value="Urgente" required>
+                    <label for="urgente">Urgente</label>
+
+                    <input type="radio" id="pouco_urgente" name="urgencia" value="Pouco Urgente" required>
+                    <label for="pouco_urgente">Pouco Urgente</label>
+
+                    <input type="radio" id="nao_urgente" name="urgencia" value="Não Urgente" required>
+                    <label for="nao_urgente">Não Urgente</label>
+                </div>
+            </div>
+
+            <div class="input-container">
+                <label for="data_desejada">Data Desejada:</label>
+                <input type="date" id="data_desejada" name="data_desejada" required>
+            </div>
+
+            <div class="file-upload-container">
+                <label for="foto_servico">Escolha a foto ou arraste para aqui</label>
+                <input type="file" id="foto_servico" name="foto_servico" accept="image/*" onchange="previewImage(event)">
+            </div>
+
+            <div class="preview-container" id="preview-container">
+                <img id="preview" src="" alt="Pré-visualização da foto">
+            </div>
+
+            <button type="submit" class="cta-button">Solicitar Agendamento</button>
+        </form>
+    </div>
+
+    <script>
+        // Função para mostrar o campo "Outro" quando o tipo de serviço for selecionado como "Outro"
+        function toggleOutroField() {
+            var tipoServico = document.getElementById("tipo_servico").value;
+            var outroField = document.getElementById("outro_servico");
+            if (tipoServico === "Outro") {
+                outroField.style.display = "block";  // Exibe o campo de descrição
+                document.getElementById("descricao_servico").setAttribute("required", "required");  // Torna o campo obrigatório
+            } else {
+                outroField.style.display = "none";  // Esconde o campo de descrição
+                document.getElementById("descricao_servico").removeAttribute("required");  // Torna o campo não obrigatório
+            }
+        }
+
+        // Função para pré-visualizar a imagem antes de enviar
+        function previewImage(event) {
+            const previewContainer = document.getElementById('preview-container');
+            const preview = document.getElementById('preview');
+            const file = event.target.files[0]; // Obtém o arquivo selecionado
+
+            if (file) {
+                const reader = new FileReader(); // Cria um novo objeto FileReader
+                reader.onload = function(e) {
+                    preview.src = e.target.result; // Define o src da imagem para o conteúdo lido
+                    preview.style.display = 'block'; // Exibe a imagem
+                    previewContainer.style.display = 'block'; // Exibe o contêiner da imagem
+                };
+                reader.readAsDataURL(file); // Lê o arquivo como uma URL
+            }
+        }
+    </script>
+
+</body>
+</html>

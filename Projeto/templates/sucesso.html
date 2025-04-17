@@ -125,7 +125,10 @@
             <p><strong>Frota do Carro:</strong> {{ frota }}</p>  <!-- Mostra a Frota -->
             <p><strong>Veículo para Manutenção:</strong> {{ veiculo }}</p>  <!-- Mostra o Veículo -->
             <p><strong>Serviço solicitado:</strong> {{ tipo_servico }}</p>
-            <p><strong>Data desejada:</strong> {{ data_desejada }}</p>
+
+            <!-- Alteração do formato da data -->
+            <p><strong>Data desejada:</strong> {{ data_desejada.strftime('%d/%m/%Y') }}</p>
+
             <p><strong>Urgência:</strong> {{ urgencia }}</p>
             {% if descricao_servico %}
                 <p><strong>Descrição do Serviço:</strong> {{ descricao_servico }}</p>

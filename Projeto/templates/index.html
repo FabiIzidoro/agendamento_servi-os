@@ -6,12 +6,12 @@
     <title>Agendamento de Serviços - Usina CMAA</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
-    <!-- Fonte Rubik -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+
     <header>
         <div class="logo">
             <img src="{{ url_for('static', filename='logo-cmaa.png') }}" alt="Logo CMAA">
@@ -24,13 +24,13 @@
             <h2>Solicite um Serviço</h2>
             <form action="{{ url_for('agendar') }}" method="POST" enctype="multipart/form-data">
                 <label for="nome">Nome do Colaborador:</label>
-                <input type="text" id="nome" name="nome" required autocomplete="name">
+                <input type="text" id="nome" name="nome" required>
 
                 <label for="matricula">Matrícula:</label>
-                <input type="text" id="matricula" name="matricula" required autocomplete="off">
+                <input type="text" id="matricula" name="matricula" required>
 
                 <label for="placa">Placa do Veículo:</label>
-                <input type="text" id="placa" name="placa" placeholder="Ex: ABC-1234" required autocomplete="plate">
+                <input type="text" id="placa" name="placa" placeholder="Ex: ABC-1234" required>
 
                 <label for="tipo_servico">Tipo de Serviço:</label>
                 <select id="tipo_servico" name="tipo_servico" required onchange="toggleOutroField()">
@@ -59,7 +59,7 @@
                 </div>
 
                 <label for="data_desejada">Data Desejada:</label>
-                <input type="date" id="data_desejada" name="data_desejada" required autocomplete="off">
+                <input type="date" id="data_desejada" name="data_desejada" required>
 
                 <label for="foto_servico">Fotos do Serviço (Opcional):</label>
                 <div class="file-upload">
@@ -75,7 +75,6 @@
         </section>
     </main>
 
-    <!-- Código JavaScript Adicionado -->
     <script>
         // Função para mostrar o campo "Outro" quando o tipo de serviço for selecionado como "Outro"
         function toggleOutroField() {
@@ -94,16 +93,16 @@
         function previewImage(event) {
             const previewContainer = document.getElementById('preview-container');
             const preview = document.getElementById('preview');
-            const file = event.target.files[0]; // Obtém o arquivo selecionado
+            const file = event.target.files[0];
 
             if (file) {
-                const reader = new FileReader(); // Cria um novo objeto FileReader
+                const reader = new FileReader();
                 reader.onload = function(e) {
-                    preview.src = e.target.result; // Define o src da imagem para o conteúdo lido
-                    preview.style.display = 'block'; // Exibe a imagem
-                    previewContainer.style.display = 'block'; // Exibe o contêiner da imagem
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                    previewContainer.style.display = 'block';
                 };
-                reader.readAsDataURL(file); // Lê o arquivo como uma URL
+                reader.readAsDataURL(file);
             }
         }
     </script>
