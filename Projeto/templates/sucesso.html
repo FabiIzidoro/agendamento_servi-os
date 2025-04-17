@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agendamento Realizado</title>
+    <title>Agendamento Realizado - Usina CMAA</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -90,13 +89,6 @@
             width: 100%;
         }
 
-        img {
-            max-width: 100%;
-            height: auto;
-            margin-top: 20px;
-            border-radius: 8px;
-        }
-
         a {
             display: inline-block;
             margin-top: 30px;
@@ -139,14 +131,6 @@
                 <p><strong>Descrição do Serviço:</strong> {{ descricao_servico }}</p>
             {% endif %}
         </div>
-
-        <!-- Exibindo a Foto do Serviço -->
-        {% if foto_path %}
-            <p><strong>Foto do serviço:</strong></p>
-            <img src="{{ url_for('static', filename='uploads/' + foto_path.split('/')[-1]) }}" alt="Foto do serviço">
-        {% else %}
-            <p><strong>Sem foto anexada.</strong></p>
-        {% endif %}
 
         <!-- Link de Voltar -->
         <a href="{{ url_for('index') }}">Voltar para a página inicial</a>
