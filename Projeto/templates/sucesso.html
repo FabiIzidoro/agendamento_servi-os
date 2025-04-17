@@ -2,18 +2,47 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agendamento Realizado</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
     <style>
         body {
             font-family: Arial, sans-serif;
             background: #f0f0f0;
-            padding: 20px;
             margin: 0;
+            padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            flex-direction: column;
+        }
+
+        /* Barra superior verde */
+        .header-bar {
+            background-color: #007b3a;  /* Verde da CMAA */
+            color: white;
+            width: 100%;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);  /* Adicionando sombra para destacar */
+        }
+
+        .logo-cmaa {
+            max-height: 50px;
+            margin-right: 15px;
+        }
+
+        .header-text {
+            font-size: 20px;
+            font-weight: bold;
         }
 
         .container {
@@ -27,6 +56,7 @@
             display: flex;
             flex-direction: column;
             align-items: flex-start;
+            margin-top: 120px;  /* Ajuste para não sobrepor a barra superior */
         }
 
         .container h1 {
@@ -84,6 +114,14 @@
     </style>
 </head>
 <body>
+
+    <!-- Barra Superior com Logo -->
+    <div class="header-bar">
+        <img src="{{ url_for('static', filename='logo-cmaa.png') }}" alt="Logo CMAA" class="logo-cmaa">
+        <div class="header-text">Agendamento de Serviços - Usina CMAA</div>
+    </div>
+
+    <!-- Conteúdo do Agendamento -->
     <div class="container">
         <h1>Agendamento realizado com sucesso!</h1>
         <p>Obrigado, <strong>{{ nome }}</strong>. O mecânico analisará sua solicitação.</p>
@@ -92,6 +130,8 @@
         <div class="info">
             <p><strong>Matrícula:</strong> {{ matricula }}</p>
             <p><strong>Placa do veículo:</strong> {{ placa }}</p>
+            <p><strong>Frota do Carro:</strong> {{ frota }}</p>  <!-- Mostra a Frota -->
+            <p><strong>Veículo para Manutenção:</strong> {{ veiculo }}</p>  <!-- Mostra o Veículo -->
             <p><strong>Serviço solicitado:</strong> {{ tipo_servico }}</p>
             <p><strong>Data desejada:</strong> {{ data_desejada }}</p>
             <p><strong>Urgência:</strong> {{ urgencia }}</p>
@@ -100,9 +140,9 @@
             {% endif %}
         </div>
 
-        <!-- Foto do Serviço -->
+        <!-- Exibindo a Foto do Serviço -->
         {% if foto_path %}
-            <p><strong>Fotos do serviço:</strong></p>
+            <p><strong>Foto do serviço:</strong></p>
             <img src="{{ url_for('static', filename='uploads/' + foto_path.split('/')[-1]) }}" alt="Foto do serviço">
         {% else %}
             <p><strong>Sem foto anexada.</strong></p>
@@ -111,5 +151,6 @@
         <!-- Link de Voltar -->
         <a href="{{ url_for('index') }}">Voltar para a página inicial</a>
     </div>
+
 </body>
 </html>

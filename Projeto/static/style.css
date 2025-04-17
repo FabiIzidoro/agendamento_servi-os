@@ -107,45 +107,39 @@ input[type="radio"], input[type="checkbox"] {
     font-size: 16px;
 }
 
-/* Estilo para os campos de urgência */
+/* Estilo para os campos de urgência (com radio buttons) */
+.urgencia-options {
+    display: flex;
+    gap: 15px;  /* Espaçamento entre as opções */
+    align-items: center;  /* Alinha as opções verticalmente */
+}
+
+/* Estilo para as opções de urgência */
 input[type="radio"] {
-    margin-right: 10px;
-    width: 20px; /* Ajustando o tamanho do botão de rádio */
+    margin-right: 5px; /* Pequeno espaçamento à direita */
+    width: 20px;
     height: 20px;
-    border-radius: 50%;
+    border-radius: 50%;  /* Caixa redonda */
     border: 2px solid #007b3a;
     transition: all 0.3s ease;
 }
 
-/* Estilo para os botões de rádio (Urgente, Pouco Urgente, Não Urgente) */
+/* Estilo quando o botão de rádio é selecionado */
 input[type="radio"]:checked {
     background-color: #007b3a;
     border-color: #007b3a;
 }
 
-/* Estilo quando o input (radio) é focado */
-input[type="radio"]:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(0, 123, 58, 0.2);
-}
-
-/* Estilo para o contêiner de radio */
-div {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-/* Melhorando a aparência dos labels para os botões de rádio */
-label[for="urgente"], label[for="pouco_urgente"], label[for="nao_urgente"] {
-    margin-left: 10px;
+/* Estilo para o label (texto) das opções de urgência */
+.urgencia-options label {
     font-size: 16px;
     color: #333;
+    cursor: pointer;  /* Adiciona o cursor de mão para interatividade */
 }
 
-/* Estilo para o contêiner de radio */
-div {
-    margin-bottom: 15px;
+/* Melhorando o layout do grupo de radio buttons */
+.input-container {
+    margin-bottom: 20px;
 }
 
 /* Estilo para a área de upload de fotos */
@@ -157,6 +151,7 @@ div {
     border-radius: 10px;
     background-color: #f9f9f9;
     transition: background-color 0.3s ease;
+    margin-bottom: 20px; /* Ajuste no espaçamento da área de upload */
 }
 
 .file-upload:hover {

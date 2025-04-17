@@ -187,10 +187,22 @@
                 <input type="text" id="placa" name="placa" required>
             </div>
 
+            <!-- Frota do Carro -->
+            <div class="input-container">
+                <label for="frota">Frota do Carro:</label>
+                <input type="text" id="frota" name="frota" required>
+            </div>
+
+            <!-- Veículo para Manutenção -->
+            <div class="input-container">
+                <label for="veiculo">Veículo para Manutenção:</label>
+                <input type="text" id="veiculo" name="veiculo" required>
+            </div>
+
             <!-- Tipo de Serviço -->
             <div class="input-container">
                 <label for="tipo_servico">Tipo de Serviço:</label>
-                <select id="tipo_servico" name="tipo_servico" required>
+                <select id="tipo_servico" name="tipo_servico" required onchange="toggleOutroField()">
                     <option value="Troca de Óleo">Troca de Óleo</option>
                     <option value="Revisão">Revisão</option>
                     <option value="Freios">Freios</option>
@@ -198,20 +210,25 @@
                 </select>
             </div>
 
-            <!-- Descrição do Serviço, caso o tipo seja "Outro" -->
-            <div class="input-container">
+            <!-- Descrição do Serviço, somente aparece quando "Outro" é selecionado -->
+            <div class="input-container" id="outro_servico" style="display:none;">
                 <label for="descricao_servico">Descrição do Serviço (Caso "Outro"):</label>
                 <textarea id="descricao_servico" name="descricao_servico" placeholder="Descreva o serviço..." rows="4"></textarea>
             </div>
 
-            <!-- Urgência do Serviço -->
+            <!-- Urgência do Serviço (Radio buttons) -->
             <div class="input-container">
                 <label for="urgencia">Urgência do Problema:</label>
-                <select id="urgencia" name="urgencia" required>
-                    <option value="Urgente">Urgente</option>
-                    <option value="Pouco Urgente">Pouco Urgente</option>
-                    <option value="Não Urgente">Não Urgente</option>
-                </select>
+                <div class="urgencia-options">
+                    <input type="radio" id="urgente" name="urgencia" value="Urgente" required>
+                    <label for="urgente">Urgente</label>
+
+                    <input type="radio" id="pouco_urgente" name="urgencia" value="Pouco Urgente" required>
+                    <label for="pouco_urgente">Pouco Urgente</label>
+
+                    <input type="radio" id="nao_urgente" name="urgencia" value="Não Urgente" required>
+                    <label for="nao_urgente">Não Urgente</label>
+                </div>
             </div>
 
             <!-- Data Desejada para o Serviço -->
@@ -220,7 +237,7 @@
                 <input type="date" id="data_desejada" name="data_desejada" required>
             </div>
 
-            <!-- Fotos do Serviço -->
+            <!-- Foto do Serviço -->
             <div class="file-upload-container">
                 <label for="foto_servico">Escolha a foto ou arraste para aqui</label>
                 <input type="file" id="foto_servico" name="foto_servico" accept="image/*">
@@ -230,6 +247,21 @@
             <button type="submit" class="cta-button">Solicitar Agendamento</button>
         </form>
     </div>
+
+    <script>
+        // Função para mostrar o campo "Outro" quando o tipo de serviço for selecionado como "Outro"
+        function toggleOutroField() {
+            var tipoServico = document.getElementById("tipo_servico").value;
+            var outroField = document.getElementById("outro_servico");
+            if (tipoServico === "Outro") {
+                outroField.style.display = "block";  // Exibe o campo de descrição
+                document.getElementById("descricao_servico").setAttribute("required", "required");  // Torna o campo obrigatório
+            } else {
+                outroField.style.display = "none";  // Esconde o campo de descrição
+                document.getElementById("descricao_servico").removeAttribute("required");  // Torna o campo não obrigatório
+            }
+        }
+    </script>
 
 </body>
 </html>
